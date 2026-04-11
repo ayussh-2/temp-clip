@@ -1,7 +1,6 @@
 import { Sidebar } from "@/components/home/sidebar";
 import { MobileHeader } from "@/components/home/mobile-header";
 import { MobileNav } from "@/components/home/mobile-nav";
-import { StatusBadge } from "@/components/home/status-badge";
 import { SessionCard } from "@/components/home/session-card";
 import { JoinSession } from "@/components/home/join-session";
 import { FeatureGrid } from "@/components/home/feature-grid";
@@ -9,21 +8,15 @@ import { FeatureGrid } from "@/components/home/feature-grid";
 export default function Home() {
   return (
     <div className="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container flex min-h-screen">
-      <Sidebar />
       <MobileHeader />
 
-      <main className="md:ml-16 md:md:ml-20 flex-1 flex flex-col items-center justify-center px-6 md:px-12 py-12 md:py-12 pt-24 md:pt-12 pb-32 md:pb-12 min-h-screen">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 py-12 md:py-12 pt-24 md:pt-12 pb-32 md:pb-12 min-h-screen">
         <div className="max-w-5xl w-full">
           <header className="mb-12 md:mb-16 text-left">
-            <div className="hidden md:block">
-              <StatusBadge />
-            </div>
-
             <div className="md:hidden w-12 h-1 bg-primary mb-6 rounded-xl"></div>
 
             <h1 className="text-4xl md:text-6xl font-heading font-extrabold tracking-tighter leading-tight mb-4">
               <span className="md:hidden">
-                Secure, <br />
                 Instant, <br />
                 <span className="text-primary-dim">Temporary.</span>
               </span>

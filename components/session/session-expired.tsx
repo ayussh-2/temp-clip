@@ -1,4 +1,24 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { apiClient } from "@/lib/api-client";
+import { useState } from "react";
+
 export function SessionExpired() {
+  const router = useRouter();
+  const [isCreating, setIsCreating] = useState(false);
+
+  async function handleRestart() {
+    setIsCreating(true);
+    try {
+      const { code } = await apiClient.createSession({ ttl: 900 });
+      router.push(`/session/${code}`);
+    } catch (error) {
+      console.error("Failed to create session:", error);
+      setIsCreating(false);
+    }
+  }
+
   return (
     <div className="absolute inset-0 bg-surface/95 backdrop-blur-sm z-50 flex items-center justify-center p-6">
       <div className="max-w-md w-full bg-surface-container-low border border-outline-variant/20 rounded-2xl p-8 md:p-10">
@@ -13,8 +33,12 @@ export function SessionExpired() {
         </div>
 
         <div className="pt-4">
-          <button className="w-full py-4 bg-primary text-on-primary font-heading font-bold rounded-xl hover:bg-primary-dim active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/10">
-            RESTART SESSION
+          <button
+            onClick={handleRestart}
+            disabled={isCreating}
+            className="w-full py-4 bg-primary text-on-primary font-heading font-bold rounded-xl hover:bg-primary-dim active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/10 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isCreating ? "CREATING SESSION..." : "RESTART SESSION"}
           </button>
         </div>
       </div>
